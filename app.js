@@ -12,14 +12,22 @@ var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var mongoose   = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var index = require('./routes/index');
+var users = require('./routes/users');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+if (app.get('env') === 'development') {
+  app.locals.pretty = true;
+}
+
+// Pug의 local에 moment라이브러리와 querystring 라이브러리를 사용할 수 있도록.
+app.locals.moment = require('moment');
+app.locals.querystring = require('querystring');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -43,7 +51,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
+// Route
+app.use('/', index);
+app.use('/users', users);
+app.use('/questions', questions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
