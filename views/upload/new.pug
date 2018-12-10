@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title New upload
+    form(action="/upload", method="POST")
+      include _form
+      button.btn.btn-outline-primary(type="submit") Post Your competition
+
+    

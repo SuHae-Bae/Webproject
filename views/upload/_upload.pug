@@ -1,0 +1,17 @@
+.content= upload.content
+.tags.badges
+  each tag in upload.tags
+    span.badge.badge-phill.badge-secondary= tag
+    | 
+.row
+  .col-sm
+    .numbers.
+      #[span.number.num-votes= upload.numLikes] likes,
+      #[span.number.num-answers= upload.numAnswers] answers,
+      #[span.number.num-views= upload.numReads] reads
+  .col-sm
+    .author
+      | asked on #{moment(upload.createdAt).format('YYYY-MM-DD')}
+      if upload.author
+        | 
+        | by #[a(href=`/users/${upload.author.id}`)= upload.author.name] 

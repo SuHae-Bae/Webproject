@@ -1,0 +1,28 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/upload', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | Competition
+      if questions.total > 0
+        .small Total #{questions.total} content(s)
+
+    if questions.total <= 0 
+      .alert.alert-info No competition available yet
+    else
+      .questions
+        each question in upload.docs
+          .question
+            a.title(href=`/upload/${upload.id}`)= question.title
+            include _upload
+
+      +paginate(questions, '/upload', query)
+
+    hr
+    a.btn.btn-primary(href='/upload/new') Ask Competition

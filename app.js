@@ -13,7 +13,7 @@ var mongoose   = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var questions = require('./routes/questions');
+var questions = require('./routes/upload');
 
 var app = express();
 
@@ -77,7 +77,7 @@ app.use(function(req, res, next) {
 // Route
 app.use('/', index);
 app.use('/users', users);
-app.use('/questions', questions);
+app.use('/upload', questions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

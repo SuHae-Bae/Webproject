@@ -1,5 +1,5 @@
 const express = require('express');
-const Question = require('../models/question');
+const Question = require('../models/upload');
 const User = require('../models/user'); 
 const Answer = require('../models/answer'); 
 const catchErrors = require('../lib/async-error');  //현재 디렉토리의 lib라는 파일의 async-error
@@ -34,16 +34,16 @@ router.get('/', catchErrors(async (req, res, next) => {
     populate: 'author', 
     page: page, limit: limit
   });
-  res.render('questions/index', {questions: questions, query: req.query});
+  res.render('upload/index', {questions: questions, query: req.query});
 }));
 
 router.get('/new', needAuth, (req, res, next) => {
-  res.render('questions/new', {question: {}});
+  res.render('upload/new', {question: {}});
 });
 
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id);
-  res.render('questions/edit', {question: question});
+  res.render('upload/edit', {question: question});
 }));
 
 router.get('/:id', catchErrors(async (req, res, next) => {
@@ -51,7 +51,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   const answers = await Answer.find({question: question.id}).populate('author'); // await가 붙었으니 찾을때까지 기다림
   question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
   await question.save(); //await가 붙었으니 찾을때까지 기다림
-  res.render('questions/show', {question: question, answers: answers}); //다 성공하면 여기에 들어옴 question: (?모르겠음) answers: 공모전 이라 생각하기
+  res.render('upload/show', {question: question, answers: answers}); //다 성공하면 여기에 들어옴 question: (?모르겠음) answers: 공모전 이라 생각하기
 }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
@@ -67,13 +67,13 @@ router.put('/:id', catchErrors(async (req, res, next) => {
 
   await question.save();
   req.flash('success', 'Successfully updated');
-  res.redirect('/questions');
+  res.redirect('/upload');
 }));
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Question.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Successfully deleted');
-  res.redirect('/questions');
+  res.redirect('/upload');
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
@@ -86,7 +86,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   });
   await question.save();
   req.flash('success', 'Successfully posted');
-  res.redirect('/questions');
+  res.redirect('/upload');
 }));
 
 router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
@@ -94,7 +94,7 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id);
 
   if (!question) {
-    req.flash('danger', 'Not exist question');
+    req.flash('danger', 'Not exist competition');
     return res.redirect('back');
   }
 
@@ -108,7 +108,7 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   await question.save();
 
   req.flash('success', 'Successfully answered');
-  res.redirect(`/questions/${req.params.id}`);
+  res.redirect(`/upload/${req.params.id}`);
 }));
 
 
