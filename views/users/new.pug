@@ -16,6 +16,12 @@ block content
       .form-group
         label(for='password_confirmation') Password Confirmation
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
+      .checkbox
+        label(for='admin')
+          input(type="checkbox", id='admin' name = 'admin', value='admin')
+          |
+          | create administrator
+        
       a.btn.btn-outline-secondary(href='/users') List
       | 
       button.btn.btn-primary(type='submit') Register 

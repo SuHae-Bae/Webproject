@@ -17,6 +17,7 @@ function validateForm(form, options) {    //일단 무시. 나중에 설명함//
   name = name.trim();
   email = email.trim();
 
+
   if (!name) {
     return 'Name is required.';
   }
@@ -37,6 +38,13 @@ function validateForm(form, options) {    //일단 무시. 나중에 설명함//
     return 'Password must be at least 6 characters.';
   }
 
+  if (form.admin.checked = true){
+    admin = "admin";
+  }
+
+  if (form.admin.checked = false){
+    admin = "x";
+  }  
   return null;
 }
 
@@ -93,7 +101,7 @@ router.put('/:id', needAuth, (req, res, next) => {
     user.save(function(err) {
       if (err) {
         return next(err);
-      }
+      }     
       req.flash('success', 'Updated successfully.');
       res.redirect('/users');
     });
@@ -138,15 +146,22 @@ router.post('/', (req, res, next) => {
       email: req.body.email,
     });
     newUser.password = req.body.password;
+    newUser.admin = req.body.admin;
 
     newUser.save(function(err) {
       if (err) {
         return next(err);
-      } else {
+      } 
+      else if(newUser.admin == "admin"){
+        req.flash('success', 'Registered as Administrator');
+        res.redirect('/');
+      }
+      else{
         req.flash('success', 'Registered successfully. Please sign in.');
         res.redirect('/');
       }
     });
+
   });
 });
 
