@@ -17,7 +17,6 @@ function validateForm(form, options) {    //일단 무시. 나중에 설명함//
   name = name.trim();
   email = email.trim();
 
-
   if (!name) {
     return 'Name is required.';
   }
@@ -38,13 +37,13 @@ function validateForm(form, options) {    //일단 무시. 나중에 설명함//
     return 'Password must be at least 6 characters.';
   }
 
-  if (form.admin.checked = true){
+  if (form.admin == true){
     admin = "admin";
   }
 
-  if (form.admin.checked = false){
+  if (form.admin == null){
     admin = "x";
-  }  
+  }
   return null;
 }
 
