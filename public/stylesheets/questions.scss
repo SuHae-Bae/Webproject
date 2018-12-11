@@ -40,6 +40,21 @@
       overflow: hidden;
       text-overflow:ellipsis;
     }
+    .sdate {
+      max-height: 5em;
+      overflow: hidden;
+      text-overflow:ellipsis;
+    }
+    .ldate {
+      max-height: 5em;
+      overflow: hidden;
+      text-overflow:ellipsis;
+    }
+    .guidance {
+      max-height: 5em;
+      overflow: hidden;
+      text-overflow:ellipsis;
+    }
   }
   .show {
     .content {

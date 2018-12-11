@@ -1,0 +1,10 @@
+$(function(){
+    $(".sdate").datepicker({
+        dateFormat:"yy/mm/dd"
+    });
+});
+$(function(){
+    $(".ldate").datepicker({
+        dateFormat:"yy/mm/dd"
+    });
+});

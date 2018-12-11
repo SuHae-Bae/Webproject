@@ -2,8 +2,32 @@
   label(for="title") Title
   input.form-control(type="text", name="title", placeholder="Title", value=question.title)
 .form-group
+  label(for="host") Host
+  input.form-control(type="text", name="host", placeholder="Host", value=question.host)
+.form-group
+  label(for="field") Field
+  input.form-control(type="text", name="field", placeholder="Title", value=question.title)
+.form-group
   label(for="content") Content
   textarea.form-control(name="content", rows="5")= question.content
+.form-group
+  label(for="title") Applicant
+  input.form-control(type="text", name="applicant", placeholder="applicant", value=question.applicant)
+.form-group
+  label(for="sdate") StartDate
+  input.form-control(type="date", name="sdate", value=question.sdate)
+.form-group
+  label(for="ldate") LastDate
+  input.form-control(type="date", name="ldate", value=question.ldate)
+.form-group
+  label(for="guidance") Guidance
+  input.form-control(type="text", name="guidance", rows="8", value= question.guidance)
+.form-group
+  label(for="manager") Manager
+  input.form-control(type="text", name="manager", placeholder="Manager name", value=question.manager)
+.form-group
+  label(for="phone") Phone
+  input.form-control(type="text", name="phone", placeholder="xxx-xxx(x)-xxxx", value=question.phone)
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=question.tags ? question.tags.join(" ") : "")

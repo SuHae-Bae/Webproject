@@ -62,13 +62,22 @@ router.put('/:id', catchErrors(async (req, res, next) => {
     return res.redirect('back');
   }
   question.title = req.body.title;
+  question.host = req.body.host;
+  question.field = req.body.field;
   question.content = req.body.content;
+  question.applicant = req.body.applicant;
+  question.sdate = req.body.sdate;
+  question.ldate = req.body.ldate;
+  question.guidance = req.body.guidance;
+  question.manager = req.body.manager;
+  question.phone = req.body.phone;
   question.tags = req.body.tags.split(" ").map(e => e.trim());
 
   await question.save();
   req.flash('success', 'Successfully updated');
   res.redirect('/upload');
 }));
+
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Question.findOneAndRemove({_id: req.params.id});
@@ -81,7 +90,15 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   var question = new Question({
     title: req.body.title,
     author: user._id,
+    host: req.body.host,
+    field: req.body.field,
     content: req.body.content,
+    applicant: req.body.applicant,
+    sdate: req.body.sdate,
+    ldate: req.body.ldate,
+    guidance: req.body.guidance,
+    manager: req.body.manager,
+    phone: req.body.phone,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
   await question.save();
