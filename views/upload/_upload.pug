@@ -1,6 +1,35 @@
-.content= question.content
-.host = question.host
-.field = question.field
+.content
+  table(style=border='2')
+      tr
+        th 공모전명: 
+        td=question.title
+      tr
+        th 주최사: 
+        td=question.host
+      tr
+        th 분야: 
+        td=question.field
+      tr
+        th 내용: 
+        td=question.content
+      tr
+        th 참가대상: 
+        td=question.applicant
+      tr
+        th 모집시작: 
+        td=question.sdate
+      tr
+        th 모집마감: 
+        td=question.ldate
+      tr
+        th 공모요강:
+        td=question.guidance
+      tr
+        th 담당자: 
+        td=question.manager
+      tr
+        th 담당자 연락처:
+        td=question.phone
 
 .tags.badges
   each tag in question.tags

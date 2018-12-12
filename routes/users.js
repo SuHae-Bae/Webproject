@@ -3,9 +3,12 @@ var express = require('express'),
 var router = express.Router();
 
 function needAuth(req, res, next) {   //일단 무시. 나중에 설명함//
-    if (req.session.user) {
+    if (req.session.user.admin == "admin") {
       next();
-    } else {
+    } else if (req.session.user.admin == null){
+      req.flash('danger','not administrator');
+      res.redirect('/');
+    } else{
       req.flash('danger', 'Please signin first.');
       res.redirect('/signin');
     }

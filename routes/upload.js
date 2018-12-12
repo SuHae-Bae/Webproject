@@ -26,7 +26,15 @@ router.get('/', catchErrors(async (req, res, next) => {
   if (term) {
     query = {$or: [
       {title: {'$regex': term, '$options': 'i'}},
-      {content: {'$regex': term, '$options': 'i'}}
+      {host: {'$regex': term, '$options': 'i'}},
+      {field: {'$regex': term, '$options': 'i'}},
+      {content: {'$regex': term, '$options': 'i'}},
+      {applicant: {'$regex': term, '$options': 'i'}},
+      {sdate: {'$regex': term, '$options': 'i'}},
+      {ldate: {'$regex': term, '$options': 'i'}},
+      {guidance: {'$regex': term, '$options': 'i'}},
+      {manager: {'$regex': term, '$options': 'i'}},
+      {phone: {'$regex': term, '$options': 'i'}}
     ]};
   }
   const questions = await Question.paginate(query, {
@@ -34,6 +42,7 @@ router.get('/', catchErrors(async (req, res, next) => {
     populate: 'author', 
     page: page, limit: limit
   });
+  
   res.render('upload/index', {questions: questions, query: req.query});
 }));
 
