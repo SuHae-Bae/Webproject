@@ -80,7 +80,7 @@ router.put('/:id', catchErrors(async (req, res, next) => {
 
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-  await Question.findOneAndRemove({_id: req.params.id});
+  await Test.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Successfully deleted');
   res.redirect('/upload');
 }));

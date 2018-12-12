@@ -17,9 +17,9 @@ block content
       .alert.alert-info No competition available yet
     else
       .questions
-        each question in upload.docs
+        each question in questions.docs
           .question
-            a.title(href=`/upload/${upload.id}`)= question.title
+            a.title(href=`/upload/${question.id}`)= question.title
             include _upload
 
       +paginate(questions, '/upload', query)
