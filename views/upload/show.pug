@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .container
-    h1.main-title= upload.title
+    h1.main-title= question.title
 
     .upload.show
       include _upload
@@ -10,18 +10,18 @@ block content
       .buttons
         button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
         | 
-        a.btn.btn-outline-secondary(href=`/upload/${upload.id}/edit`) Edit
+        a.btn.btn-outline-secondary(href=`/upload/${question.id}/edit`) Edit
         | 
-        a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/upload/${upload.id}?_method=delete`) Delete
+        a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/upload/${question.id}?_method=delete`) Delete
       
-    if upload.numAnswers > 0
+    if question.numAnswers > 0
       hr
-      h3 #{upload.numAnswers} Answer(s)
+      h3 #{question.numAnswers} Answer(s)
       .answers.show
         each answer in answers
           include _answer
 
-    form(action=`/upload/${upload.id}/answers`, method='POST')
+    form(action=`/upload/${question.id}/answers`, method='POST')
       .form-group
         label(for='answer') Your Answer
         textarea.form-control(name="content", rows="5")
